@@ -1,0 +1,7 @@
+.venv/
+.pytest_cache/
+.mypy_cache/
+.flake8
+_pycache_/
+*.pyc
+.idea/
