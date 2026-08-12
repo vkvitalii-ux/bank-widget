@@ -10,7 +10,7 @@ def mask_account_card(info: str) -> str:
     name = " ".join(parts[:-1])
     number = parts[-1]
 
-    if "Счёт" in name:
+    if "счёт" in name.lower() or "счёт" in name.lower():
         return f"{name} {get_mask_account_number(number)}"
     else:
         return f"{name} {get_mask_card_number(number)}"
