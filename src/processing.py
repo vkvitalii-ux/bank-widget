@@ -5,3 +5,8 @@ def filter_by_state(data: list[dict], state: str = "EXECUTED") -> list[dict]:
         if item.get("state") == state:
             filtered_list.append(item)
     return filtered_list
+
+
+def sort_by_date(data: list[dict], reverse: bool = True) -> list[dict]:
+    """Сортирует список словарей по дате."""
+    return sorted(data, key=lambda item: item.get("date", ""), reverse=reverse)
