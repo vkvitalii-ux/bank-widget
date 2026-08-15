@@ -44,3 +44,14 @@ data = [
 sorted_data = sort_by_date(data)
 print(sorted_data)
 '''
+
+## Как запустить тесты и проверки
+
+1. Запуск тестов:
+   poetry run pytest
+
+2. Проверка стиля кода:
+   poetry run flake8 src tests
+
+3. Проверка типов:
+   poetry run mypy src tests
