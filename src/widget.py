@@ -1,6 +1,4 @@
-from datetime import datetime
-
-from src.masks import get_mask_account_number, get_mask_card_number
+from src.masks import get_mask_card_number
 
 
 def mask_account_card(info_string: str) -> str:
@@ -26,7 +24,7 @@ def mask_account_card(info_string: str) -> str:
 
 def get_date(date_str: str) -> str:
     """Функция принимает строку с датой и возвращает её в формате ДД.ММ.ГГГГ"""
-    if not date_str or len(date_str) <10:
+    if not date_str or len(date_str) < 10:
         return ""
 
     year = date_str[:4]
@@ -36,12 +34,4 @@ def get_date(date_str: str) -> str:
     return f"{day}.{month}.{year}"
 
 
-# Этот блок для проверки
-if __name__ == "__main__":
-    test_card = "Visa Platinum 7000792289606361"
-    test_account = "Счёт 73654108430135874305"
-    test_iso_date = "2024-03-11Т02:26:18.671407"
 
-    print(mask_account_card(test_card))
-    print(mask_account_card(test_account))
-    print("Результат форматирования даты:", get_date(test_iso_date))
