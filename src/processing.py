@@ -11,8 +11,6 @@ def sort_by_date(data: list[dict], reverse: bool = True) -> list[dict]:
     """Сортирует список словарей по дате от большей к меньшей
     (по умолчанию)."""
     sorted_list = sorted(
-        data,
-        key=lambda item: item.get("date", ""),
-        reverse=reverse
+        data, key=lambda item: item.get("date", ""), reverse=reverse
     )
     return sorted_list

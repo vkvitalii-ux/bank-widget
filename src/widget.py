@@ -32,6 +32,3 @@ def get_date(date_str: str) -> str:
     day = date_str[8:10]
 
     return f"{day}.{month}.{year}"
-
-
-
