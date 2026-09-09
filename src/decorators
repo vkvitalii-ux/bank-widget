@@ -1,0 +1,51 @@
+from datetime import datetime
+from functools import wraps
+from typing import Callable, Any, Optional
+
+def log(filename: Optional[str] = None) -> Callable:
+    """Параметризованный декоратор для логирования работы функций."""
+
+    def decorator(func: Callable) -> Callable:
+
+        @wraps(func)
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
+
+            # 1. Фиксируем текущее время и имя запущенной функции
+            current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            func_name = func._name_
+
+            try:
+                #2. Запускаем оригинальную функцию с её аргументами
+                result = func(*args, **kwargs)
+
+                #3. Формируем сообщение об успешном выполнении
+                log_message = f"{current_time} {func_name} ok"
+
+                #4. Проверяем, куда записывать: в файл или в консоль
+                if filename:
+                    with open(filename, "a", encoding="utf-8") as f:
+                        f.write(log_message + "\n")
+
+                else:
+                    print(log_message)
+
+                #5. Возвращаем результат работы функции
+                return result
+
+            except Exception as e:
+                log_message = f"{current_time} {func_name} error: {type(e)._name_}"
+
+                if filename:
+                    with open(filename, "a", encoding="utf-8") as f:
+
+                else:
+                    print(log_message)
+
+                raise e
+
+        return wrapper
+    return decorator
+
+
+
+
