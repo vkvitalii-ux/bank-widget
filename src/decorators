@@ -33,7 +33,7 @@ def log(filename: Optional[str] = None) -> Callable:
                 return result
 
             except Exception as e:
-                log_message = f"{current_time} {func_name} error: {type(e)._name_}"
+                log_message = f"{current_time} {func_name} error: {type(e)._name_}. Inputs: {args}, {kwargs}"
 
                 if filename:
                     with open(filename, "a", encoding="utf-8") as f:
