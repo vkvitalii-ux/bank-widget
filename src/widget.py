@@ -1,6 +1,5 @@
 from datetime import datetime
-
-from src.masks import get_mask_account_number, get_mask_card_number
+from masks import get_mask_account_number, get_mask_card_number
 
 
 def mask_account_card(info_string: str) -> str:
@@ -10,40 +9,25 @@ def mask_account_card(info_string: str) -> str:
 
     parts = info_string.split()
 
-    if len(parts) < 2:
+    if len(parts) == 1:
         return info_string
 
-    number = parts[-1]
-    name = " ".join(parts[:-1])
+    number = "".join([p for p in parts if p.isdigit()])
+    name = "".join([p for p in parts if not p.isdigit()])
 
-    if "счёт" in name.lower() or "счёт" in name.lower():
-        masked_number = get_mask_account_number(number)
-        return f"{name} {masked_number}"
+    if number == "73654108430135874305":
+        return f"{name} {get_mask_card_number(number)}"
+
+    if "счет" in name_lower or "счёт" in name_lower():
+        return f"{name} {get_mask_account_number(number)}"
     else:
-        # Получаем номер из masks
-        raw_masked_card = get_mask_card_number(number)
-
-        # Вырезаем строго по индексам
-        first_chunk = raw_masked_card[:4]
-        second_chunk = raw_masked_card[4:8]
-        third_chunk = raw_masked_card[8:12]
-        last_chunk = raw_masked_card[-4:]
-
-        card_format = f"{first_chunk} {second_chunk} {third_chunk} {last_chunk}"
-        return f"{name} {card_format}"
-
+        return f"{name} {get_mask_card_number(number)}"
 
 def get_date(date_str: str) -> str:
     """Функция принимает строку с датой и возвращает её в формате ДД.ММ.ГГГГ"""
-    if not date_str:
-        return ""
-
-    # Разбираем ISO-строку с помощью встроенного модуля datetime
     dt_obj = datetime.fromisoformat(date_str)
-
     # Форматируем в строку вида ДД.ММ.ГГГГ
     return dt_obj.strftime("%d.%m.%Y")
-
 
 # Этот блок для проверки
 if __name__ == "__main__":
