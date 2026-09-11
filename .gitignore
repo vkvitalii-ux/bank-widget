@@ -5,3 +5,8 @@
 _pycache_/
 *.pyc
 .idea/
+.coverage
+htmlcov/
+test_output.log
+test_error_output.log
+mylog.txt
