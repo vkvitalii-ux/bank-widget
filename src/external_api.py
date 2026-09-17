@@ -25,10 +25,11 @@ def convert_transaction_amount(transaction: dict) -> float:
         return amount
 
     # Если валюта USD или EUR, делаем запрос к внешнему сервису курсов
-    url = f"https://apilayer.com{currency_code}&amount={amount}"
+    url = "https://apilayer.com"
+    query_params = {"to": "RUB", "from": currency_code, "amount": amount}
     headers = {"apikey": API_KEY}
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, params=query_params)
 
     if response.status_code == 200:
         data = response.json()
