@@ -2,7 +2,8 @@ import json
 import os
 
 import logging
-
+logging.basicConfig(filename="logs/utils.log", filemode="w",
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 
 from typing import Any

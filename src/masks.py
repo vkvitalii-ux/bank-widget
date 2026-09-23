@@ -1,6 +1,9 @@
 import logging
 
+logging.basicConfig(filename="logs/masks.log", filemode="w",
+                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
 
 def get_mask_card_number(card_number: str) -> str:
     """Функция маскирует номер банковской карты."""
