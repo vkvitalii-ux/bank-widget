@@ -1,8 +1,7 @@
+import logging
 import os
 
 from src.decorators import log
-
-import logging
 
 logging.basicConfig(filename="test_run.log", level=logging.INFO, filemode="w")
 logger = logging.getLogger(__name__)
@@ -19,7 +18,7 @@ def test_log_to_console_success(capsys):
     assert add(2, 3) == 5
     captured = capsys.readouterr()
     assert captured.out.strip() == "add ok"
-    logger.info(f"Тест успешно завершён")
+    logger.info("Тест успешно завершён")
 
 
 def test_log_to_console_error(capsys):
@@ -38,7 +37,7 @@ def test_log_to_console_error(capsys):
     captured = capsys.readouterr()
     expected_msg = "divide error: ZeroDivisionError. Inputs: (1, 0), {}"
     assert expected_msg in captured.out
-    logger.info(f"Тест успешно завершён")
+    logger.info("Тест успешно завершён")
 
 
 def test_log_to_file_success():
@@ -59,7 +58,7 @@ def test_log_to_file_success():
 
     if os.path.exists(test_file):
         os.remove(test_file)
-        logger.info(f"Тест успешно завершён")
+        logger.info("Тест успешно завершён")
 
 
 def test_log_to_file_error():
@@ -83,4 +82,4 @@ def test_log_to_file_error():
 
     if os.path.exists(test_file):
         os.remove(test_file)
-        logger.info(f"Тест успешно завершён")
+        logger.info("Тест успешно завершён")

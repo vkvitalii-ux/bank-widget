@@ -5,16 +5,21 @@ logger.setLevel(logging.DEBUG)
 
 file_handler = logging.FileHandler("logs/masks.log", mode="w")
 
-file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
 file_handler.setFormatter(file_formatter)
-logger .addHandler(file_handler)
+logger.addHandler(file_handler)
+
 
 def get_mask_card_number(card_number: str) -> str:
     """Функция маскирует номер банковской карты."""
     logger.info(f"Начало маскирования карты. Исходный номер: {card_number}")
     if not card_number or len(card_number) < 16:
-        logger.warning(f"Передан некорректный номер карты: {card_number}. Длина должна быть 16 символов.")
+        logger.error(f"Передан некорректный номер карты: {card_number}. "
+                     f"Длина должна быть 16 символов."
+                     )
         return card_number
 
     masked = (
@@ -29,7 +34,9 @@ def get_mask_account_number(account_number: str) -> str:
     """Функция маскирует номер банковского счета."""
     logger.info(f"Начало маскирования счета. Исходный номер: {account_number}")
     if not account_number or len(account_number) < 4:
-        logger.warning(f"Передан некорректный номер счета: {account_number}. Длина должна быть 4 символа.")
+        logger.error(f"Передан некорректный номер счета: {account_number}. "
+                     f"Длина должна быть 4 символа."
+                     )
         return account_number
 
     masked_account = "**" + account_number[-4:]
