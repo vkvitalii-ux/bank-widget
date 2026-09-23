@@ -2,11 +2,19 @@ import json
 import os
 
 import logging
-logging.basicConfig(filename="logs/utils.log", filemode="w",
-                    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
 logger = logging.getLogger(__name__)
 
 from typing import Any
+
+logger.setLevel(logging.DEBUG)
+
+file_handler = logging.FileHandler("logs/utils.log", mode="w")
+
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
 
 
 def get_financial_transactions(file_path: str) -> list[dict[str, Any]]:
