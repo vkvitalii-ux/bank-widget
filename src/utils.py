@@ -1,11 +1,9 @@
 import json
-import os
-
 import logging
+import os
+from typing import Any
 
 logger = logging.getLogger(__name__)
-
-from typing import Any
 
 
 def get_financial_transactions(file_path: str) -> list[dict[str, Any]]:
@@ -26,5 +24,7 @@ def get_financial_transactions(file_path: str) -> list[dict[str, Any]]:
                 return data
             return []
     except (json.JSONDecodeError, FileNotFoundError):
-        logger.error(f"Ошибка: файл {file_path} поврежден или сдержит неверный формат JSON")
+        logger.error(
+            f"Ошибка: файл {file_path} поврежден или "
+            f"сoдержит неверный формат JSON")
         return []
